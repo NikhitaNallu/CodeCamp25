@@ -1,6 +1,7 @@
 package com.example.cyhunt;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -185,10 +186,14 @@ public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapt
 
         // Get the hunt ID from the selected hunt
         String huntId = selectedHunt.gethuntId(); // Assuming you have a getter for hunt ID in HuntsObject
-
+        SharedPreferences prefs = getSharedPreferences("userPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("huntId", huntId);  // Store huntId
+        editor.apply();
         Intent intent = new Intent(HuntsActivity.this, HuntsLocationsActivity.class);
         intent.putExtra("selected-hunt", huntId);  // Passing the full hunt object with its locations
         startActivity(intent);
+
 
     }
 }
