@@ -40,6 +40,8 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.gms.play.services.maps)
     implementation(libs.play.services.location)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

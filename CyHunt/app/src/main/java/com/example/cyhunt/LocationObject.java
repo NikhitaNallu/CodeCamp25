@@ -1,3 +1,4 @@
+
 package com.example.cyhunt;
 
 import android.os.Parcel;
@@ -6,16 +7,19 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class LocationObject implements Parcelable {
+    private String locationID;
     private String locationName;
+    private boolean isQuizCompleted;
     private String locationDescription;
     private String locationHint1;
     private String locationHint2;
     private String locationHint3;
     private double locationLat;
     private double locationLong;
-    private boolean isQuizCompleted;
 
     private String imageUrl;
+    private String quizQuestion;
+    private String quizAnswer;
 
 
     //To-add later
@@ -24,7 +28,8 @@ public class LocationObject implements Parcelable {
     private ImageView ingredientPicture;
     */
 
-    public LocationObject(String name, String description, String hint1, String hint2, String hint3, double lat, double longi, String imageUrl) {
+    public LocationObject(String ID, String name, String description, String hint1, String hint2, String hint3, double lat, double longi, String imageUrl, String question, String answer) {
+        this.locationID = ID;
         this.locationName = name;
         this.locationDescription = description;
         this.locationHint1 = hint1;
@@ -33,12 +38,14 @@ public class LocationObject implements Parcelable {
         this.locationLat = lat;
         this.locationLong = longi;
         this.imageUrl = imageUrl;
+        this.quizQuestion = question;
+        this.quizAnswer = answer;
         this.isQuizCompleted = false; // Initially not completed
-
     }
 
 
     protected LocationObject(Parcel in) {
+        locationID = in.readString();
         locationName = in.readString();
         locationDescription = in.readString();
         locationHint1 = in.readString();
@@ -47,6 +54,8 @@ public class LocationObject implements Parcelable {
         locationLat = in.readDouble();
         locationLong = in.readDouble();
         imageUrl = in.readString();
+        quizQuestion = in.readString();
+        quizAnswer = in.readString();
     }
 
     public static final Creator<LocationObject> CREATOR = new Creator<LocationObject>() {
@@ -60,6 +69,9 @@ public class LocationObject implements Parcelable {
             return new LocationObject[size];
         }
     };
+    public String getLocationID() {
+        return locationID;
+    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -93,6 +105,10 @@ public class LocationObject implements Parcelable {
         return locationLong;
     }
 
+    public String getQuizQuestion() {
+        return quizQuestion;
+    }
+
     public boolean isQuizCompleted() {
         return isQuizCompleted;
     }
@@ -100,6 +116,12 @@ public class LocationObject implements Parcelable {
     public void setQuizCompleted(boolean quizCompleted) {
         isQuizCompleted = quizCompleted;
     }
+
+    public String getQuizAnswer() {
+        return quizAnswer;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -107,6 +129,7 @@ public class LocationObject implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(locationID);
         dest.writeString(locationName);
         dest.writeString(locationDescription);
         dest.writeString(locationHint1);
@@ -115,5 +138,7 @@ public class LocationObject implements Parcelable {
         dest.writeDouble(locationLat);
         dest.writeDouble(locationLong);
         dest.writeString(imageUrl);
+        dest.writeString(quizQuestion);
+        dest.writeString(quizAnswer);
     }
 }
