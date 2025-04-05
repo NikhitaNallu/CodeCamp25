@@ -78,9 +78,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,17 +134,37 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        LatLng statueLocation = new LatLng(42.027, -93.648);
 //
 //        mMap.addMarker(new MarkerOptions().position(statueLocation).title("Sample Statue"));
+//        mMap = googleMap;
+//
+//        Log.d("MapReady", "Google Map is ready!");
+//
+//        // Set default camera position
+//        LatLng campusCenter = new LatLng(42.0265, -93.6465);
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusCenter, 16));
+//
+//        // Add a marker and log the action
+//        LatLng statueLocation = new LatLng(42.027, -93.648);
+//        mMap.addMarker(new MarkerOptions().position(statueLocation).title("Sample Statue"));
+//        Log.d("Marker", "Added marker at: " + statueLocation.toString());
         mMap = googleMap;
 
-        Log.d("MapReady", "Google Map is ready!");
+        // Get the list of statues
+        List<LocationObject> statues = StatueRepository.getAllStatues(this);
 
-        // Set default camera position
-        LatLng campusCenter = new LatLng(42.0265, -93.6465);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusCenter, 16));
+        // Loop through statues and add pins to the map only if the quiz is completed
+        for (LocationObject statue : statues) {
+            if (statue.isQuizCompleted()) {
+                // Add a marker for each statue that has passed the quiz
+                LatLng statueLocation = new LatLng(statue.getLocationLat(), statue.getLocationLong());
+                mMap.addMarker(new MarkerOptions()
+                        .position(statueLocation)
+                        .title(statue.getName())
+                        .snippet(statue.getDescription())); // Optionally show the description in the snippet
+            }
+        }
 
-        // Add a marker and log the action
-        LatLng statueLocation = new LatLng(42.027, -93.648);
-        mMap.addMarker(new MarkerOptions().position(statueLocation).title("Sample Statue"));
-        Log.d("Marker", "Added marker at: " + statueLocation.toString());
+        // Zoom into the campus or central point
+        LatLng campusCenter = new LatLng(42.0265, -93.6465);  // You can set this to the center of your campus
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(campusCenter, 15));  // Adjust zoom level as needed
     }
 }

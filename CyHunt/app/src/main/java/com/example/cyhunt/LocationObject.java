@@ -13,6 +13,7 @@ public class LocationObject implements Parcelable {
     private String locationHint3;
     private double locationLat;
     private double locationLong;
+    private boolean isQuizCompleted;
 
     private String imageUrl;
 
@@ -32,6 +33,7 @@ public class LocationObject implements Parcelable {
         this.locationLat = lat;
         this.locationLong = longi;
         this.imageUrl = imageUrl;
+        this.isQuizCompleted = false; // Initially not completed
 
     }
 
@@ -91,7 +93,13 @@ public class LocationObject implements Parcelable {
         return locationLong;
     }
 
+    public boolean isQuizCompleted() {
+        return isQuizCompleted;
+    }
 
+    public void setQuizCompleted(boolean quizCompleted) {
+        isQuizCompleted = quizCompleted;
+    }
     @Override
     public int describeContents() {
         return 0;
