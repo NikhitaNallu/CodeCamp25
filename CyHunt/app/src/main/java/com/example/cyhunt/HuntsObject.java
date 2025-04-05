@@ -10,22 +10,24 @@ import java.util.ArrayList;
 public class HuntsObject implements Parcelable {
     private String name;
     private String description;
+    private String huntId;
     private int numLocations;
 
     private ArrayList<LocationObject> locations;
     private String imageUrl;
 
-    public HuntsObject(String name, String description, int numLocations, String imageUrl, ArrayList<LocationObject> locations) {
+    public HuntsObject(String huntId, String name, String description, int numLocations, String imageUrl, ArrayList<LocationObject> locations) {
+        this.huntId = huntId;
         this.name = name;
         this.description = description;
         this.numLocations = numLocations;
         this.imageUrl = imageUrl;
         this.locations = locations;
-
     }
 
 
     protected HuntsObject(Parcel in) {
+        huntId = in.readString();
         name = in.readString();
         description = in.readString();
         numLocations = in.readInt();
@@ -45,6 +47,9 @@ public class HuntsObject implements Parcelable {
         }
     };
 
+    public String gethuntId() {
+        return huntId;
+    }
     public String getImageUrl() {
         return imageUrl;
     }
@@ -72,6 +77,7 @@ public class HuntsObject implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(huntId);
         dest.writeString(name);
         dest.writeString(description);
         dest.writeInt(numLocations);

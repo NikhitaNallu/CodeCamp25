@@ -15,6 +15,8 @@ public class LocationObject implements Parcelable {
     private double locationLong;
 
     private String imageUrl;
+    private String quizQuestion;
+    private String quizAnswer;
 
 
     //To-add later
@@ -23,7 +25,7 @@ public class LocationObject implements Parcelable {
     private ImageView ingredientPicture;
     */
 
-    public LocationObject(String name, String description, String hint1, String hint2, String hint3, double lat, double longi, String imageUrl) {
+    public LocationObject(String name, String description, String hint1, String hint2, String hint3, double lat, double longi, String imageUrl, String question, String answer) {
         this.locationName = name;
         this.locationDescription = description;
         this.locationHint1 = hint1;
@@ -32,6 +34,8 @@ public class LocationObject implements Parcelable {
         this.locationLat = lat;
         this.locationLong = longi;
         this.imageUrl = imageUrl;
+        this.quizQuestion = question;
+        this.quizAnswer = answer;
 
     }
 
@@ -45,6 +49,8 @@ public class LocationObject implements Parcelable {
         locationLat = in.readDouble();
         locationLong = in.readDouble();
         imageUrl = in.readString();
+        quizQuestion = in.readString();
+        quizAnswer = in.readString();
     }
 
     public static final Creator<LocationObject> CREATOR = new Creator<LocationObject>() {
@@ -91,6 +97,14 @@ public class LocationObject implements Parcelable {
         return locationLong;
     }
 
+    public String getQuizQuestion() {
+        return quizQuestion;
+    }
+
+    public String getQuizAnswer() {
+        return quizAnswer;
+    }
+
 
     @Override
     public int describeContents() {
@@ -107,5 +121,7 @@ public class LocationObject implements Parcelable {
         dest.writeDouble(locationLat);
         dest.writeDouble(locationLong);
         dest.writeString(imageUrl);
+        dest.writeString(quizQuestion);
+        dest.writeString(quizAnswer);
     }
 }

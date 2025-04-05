@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HuntsLocationsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/red"
+        android:titleTextColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="@id/container" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <TextView
+            android:id="@+id/location_hint_1"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Hint 1:"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/location_hint_2"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="Hint 2:"
+            android:layout_marginTop="80dp"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/location_hint_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Hint 3:"
+            android:layout_marginTop="80dp"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/location_quiz_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quiz:"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:layout_marginTop="80dp">
+
+        </TextView>
+        <EditText
+            android:id="@+id/location_quiz_guess_edit_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+
+        </EditText>
+
+        <Button
+            android:id="@+id/location_submit_guess_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:backgroundTint="@color/red"
+            android:textSize="20dp"
+            android:layout_marginTop="40dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
