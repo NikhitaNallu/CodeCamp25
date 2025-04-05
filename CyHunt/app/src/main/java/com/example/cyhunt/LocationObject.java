@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 public class LocationObject implements Parcelable {
     private String locationID;
     private String locationName;
+    private boolean isQuizCompleted;
     private String locationDescription;
     private String locationHint1;
     private String locationHint2;
@@ -38,7 +39,7 @@ public class LocationObject implements Parcelable {
         this.imageUrl = imageUrl;
         this.quizQuestion = question;
         this.quizAnswer = answer;
-
+        this.isQuizCompleted = false; // Initially not completed
     }
 
 
@@ -110,6 +111,18 @@ public class LocationObject implements Parcelable {
     public String getQuizAnswer() {
         return quizAnswer;
     }
+
+
+
+    public boolean isQuizCompleted() {
+        return isQuizCompleted;
+    }
+
+    public void setQuizCompleted(boolean quizCompleted) {
+        isQuizCompleted = quizCompleted;
+    }
+
+
 
 
     @Override

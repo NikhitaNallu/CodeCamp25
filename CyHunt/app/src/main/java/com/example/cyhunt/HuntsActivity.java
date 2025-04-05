@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -153,6 +154,25 @@ public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapt
                         Log.e("Firestore", "Error getting locations: ", task.getException());
                     }
                 });
+    }
+
+
+    //    @Override
+    //    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    //        if (item.getItemId() == android.R.id.home) {
+    //            // Navigate back when the back arrow is pressed
+    //            finish(); // or use NavUtils.navigateUpFromSameTask(this); if you're doing more complex navigation
+    //            return true;
+    //        }
+    //        return super.onOptionsItemSelected(item);
+    //    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // or onBackPressed()
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
