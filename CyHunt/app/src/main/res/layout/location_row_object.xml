@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:layout_marginHorizontal="5dp"
+    app:cardCornerRadius="10dp"
+    android:id="@+id/hunt_card"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="100dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingHorizontal="5dp"
+        android:layout_gravity="center">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:text="Name"
+                android:id="@+id/location_name_txt"
+                android:textSize="20dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/location_view_hints_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="20dp"
+            android:text="View Hints"
+            android:backgroundTint="@color/red"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
