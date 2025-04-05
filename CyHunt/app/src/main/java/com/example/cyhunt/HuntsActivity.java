@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -105,6 +106,8 @@ public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapt
                     }
                 });
     }
+
+
     // Method to fetch locations for a specific hunt
     private void fetchLocationsForHunt(String huntId, ArrayList<LocationObject> huntLocations, QueryDocumentSnapshot document, String huntName, String huntDescription) {
         CollectionReference locationsRef = db.collection("scavengerHunts")
@@ -153,6 +156,7 @@ public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapt
                 });
     }
 
+
     //    @Override
     //    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     //        if (item.getItemId() == android.R.id.home) {
@@ -172,19 +176,19 @@ public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapt
     }
 
     @Override
-        public void onHuntsClick(int position) {
-            HuntsObject selectedHunt = huntsArrayList.get(position);
-            if (selectedHunt == null) {
-                Log.e("Hunt Click", "Selected recipe is null at position: " + position);
-                return;
-            }
-
-            // Get the hunt ID from the selected hunt
-            String huntId = selectedHunt.gethuntId(); // Assuming you have a getter for hunt ID in HuntsObject
-
-            Intent intent = new Intent(HuntsActivity.this, HuntsLocationsActivity.class);
-            intent.putExtra("selected-hunt", huntId);  // Passing the full hunt object with its locations
-            startActivity(intent);
-
+    public void onHuntsClick(int position) {
+        HuntsObject selectedHunt = huntsArrayList.get(position);
+        if (selectedHunt == null) {
+            Log.e("Hunt Click", "Selected recipe is null at position: " + position);
+            return;
         }
+
+        // Get the hunt ID from the selected hunt
+        String huntId = selectedHunt.gethuntId(); // Assuming you have a getter for hunt ID in HuntsObject
+
+        Intent intent = new Intent(HuntsActivity.this, HuntsLocationsActivity.class);
+        intent.putExtra("selected-hunt", huntId);  // Passing the full hunt object with its locations
+        startActivity(intent);
+
+    }
 }

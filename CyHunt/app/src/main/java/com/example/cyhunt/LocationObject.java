@@ -1,4 +1,3 @@
-
 package com.example.cyhunt;
 
 import android.os.Parcel;
@@ -109,6 +108,12 @@ public class LocationObject implements Parcelable {
         return quizQuestion;
     }
 
+    public String getQuizAnswer() {
+        return quizAnswer;
+    }
+
+
+
     public boolean isQuizCompleted() {
         return isQuizCompleted;
     }
@@ -117,9 +122,7 @@ public class LocationObject implements Parcelable {
         isQuizCompleted = quizCompleted;
     }
 
-    public String getQuizAnswer() {
-        return quizAnswer;
-    }
+
 
 
     @Override

@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +24,8 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
 
     RecyclerView recyclerHome;
     private ArrayList<LocationObject> locationArrayList;
-    private HuntsObject hunt;
+    private String huntID;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +39,15 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
 
 
         locationArrayList = new ArrayList<>();
+        // Get the current user ID
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        db = FirebaseFirestore.getInstance();
 
 
         if(getIntent().hasExtra("selected-hunt")){
-            hunt = getIntent().getParcelableExtra("selected-hunt");
-            locationArrayList = hunt.getLocations();
-
+            huntID = getIntent().getStringExtra("selected-hunt");
+            fetchLocationsForHunt(huntID);
         }
 
         LocationObjectAdapter adapter = new LocationObjectAdapter(locationArrayList, this, this);
@@ -83,6 +91,44 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
             getSupportActionBar().setTitle("Your Title"); // Optional: set a custom title
         }
     }
+
+    private void fetchLocationsForHunt(String huntId) {
+        CollectionReference locationsRef = db.collection("scavengerHunts")
+                .document(huntId)
+                .collection("locations");
+
+        locationsRef.get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Fetch locations from the subcollection and create LocationObject
+                        for (QueryDocumentSnapshot locationDoc : task.getResult()) {
+                            String locationId = locationDoc.getId();
+                            String locationName = locationDoc.getString("name");
+                            String locationDescription = locationDoc.getString("description");
+                            double latitude = locationDoc.getDouble("latitude");
+                            double longitude = locationDoc.getDouble("longitude");
+                            String hint1 = locationDoc.getString("hint1");
+                            String hint2 = locationDoc.getString("hint2");
+                            String hint3 = locationDoc.getString("hint3");
+                            String image = locationDoc.getString("imageUrl");
+                            String question = locationDoc.getString("quizQuestion");
+                            String answer = locationDoc.getString("quizAnswer");
+
+                            // Add each location to the huntLocations array
+                            locationArrayList.add(new LocationObject(locationId, locationName, locationDescription, hint1, hint2, hint3, latitude, longitude, image, question, answer));
+                        }
+                        if (!locationArrayList.isEmpty()) {
+                            recyclerHome.getAdapter().notifyDataSetChanged();
+                        } else {
+                            Log.w("Firestore", "No locations found for hunt " + huntId);
+                        }
+
+                    } else {
+                        Log.e("Firestore", "Error getting locations: ", task.getException());
+                    }
+                });
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -95,12 +141,13 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
     public void onLocationClick(int position) {
         LocationObject selectedLocation = locationArrayList.get(position);
         if (selectedLocation == null) {
-            Log.e("PlannerClick", "Selected recipe is null at position: " + position);
+            Log.e("Location Click", "Selected location is null at position: " + position);
             return;
         }
 
-        Intent intent = new Intent(this, HuntsLocationsActivity.class);
-        intent.putExtra("selected_recipe", selectedLocation);
+        Intent intent = new Intent(this, LocationHintsActivity.class);
+        intent.putExtra("selected_location", selectedLocation);
+        intent.putExtra("selected_hunt", huntID);
         startActivity(intent);
     }
 }
