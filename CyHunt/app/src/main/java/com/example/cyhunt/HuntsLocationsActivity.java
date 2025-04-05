@@ -66,6 +66,7 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
                     if (task.isSuccessful()) {
                         // Fetch locations from the subcollection and create LocationObject
                         for (QueryDocumentSnapshot locationDoc : task.getResult()) {
+                            String locationId = locationDoc.getId();
                             String locationName = locationDoc.getString("name");
                             String locationDescription = locationDoc.getString("description");
                             double latitude = locationDoc.getDouble("latitude");
@@ -78,7 +79,7 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
                             String answer = locationDoc.getString("quizAnswer");
 
                             // Add each location to the huntLocations array
-                            locationArrayList.add(new LocationObject(locationName, locationDescription, hint1, hint2, hint3, latitude, longitude, image, question, answer));
+                            locationArrayList.add(new LocationObject(locationId, locationName, locationDescription, hint1, hint2, hint3, latitude, longitude, image, question, answer));
                         }
                         if (!locationArrayList.isEmpty()) {
                             recyclerHome.getAdapter().notifyDataSetChanged();
@@ -102,6 +103,7 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
 
         Intent intent = new Intent(this, LocationHintsActivity.class);
         intent.putExtra("selected_location", selectedLocation);
+        intent.putExtra("selected_hunt", huntID);
         startActivity(intent);
     }
 }
