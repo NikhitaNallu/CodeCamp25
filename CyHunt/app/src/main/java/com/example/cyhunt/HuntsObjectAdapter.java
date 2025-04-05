@@ -2,9 +2,14 @@ package com.example.cyhunt;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +42,7 @@ public class HuntsObjectAdapter extends RecyclerView.Adapter<HuntsObjectAdapter.
         HuntsObject huntData = huntDataArrayList.get(position);
         holder.huntName.setText(huntData.getName());
         holder.huntDescription.setText(String.valueOf(huntData.getDescription()));
+        holder.hunt_image.setImageURI(Uri.parse("@drawable/breaking_sculpture.png"));
     }
 
     @Override
@@ -48,12 +54,14 @@ public class HuntsObjectAdapter extends RecyclerView.Adapter<HuntsObjectAdapter.
 
         private TextView huntName;
         private TextView huntDescription;
+        private ImageView hunt_image;
         OnHuntsListener onHuntsListener;
 
         public HuntsView(@NonNull View itemView, OnHuntsListener onHuntsListener){
             super(itemView);
             huntName = itemView.findViewById(R.id.hunt_name_txt);
             huntDescription = itemView.findViewById(R.id.hunt_description_txt);
+            hunt_image = itemView.findViewById(R.id.hunt_image);
             this.onHuntsListener = onHuntsListener;
 
             itemView.setOnClickListener(this);

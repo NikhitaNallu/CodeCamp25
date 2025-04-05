@@ -20,6 +20,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="5dp"
         android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
@@ -27,26 +28,24 @@
             android:id="@+id/location_hint_1"
             android:layout_width="match_parent"
             android:textAlignment="center"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
             android:text="Hint 1:"
             android:layout_marginTop="10dp"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
         <TextView
             android:id="@+id/location_hint_2"
             android:layout_width="match_parent"
             android:textAlignment="center"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
             android:text="Hint 2:"
-            android:layout_marginTop="80dp"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
         <TextView
             android:id="@+id/location_hint_3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
             android:textAlignment="center"
             android:text="Hint 3:"
-            android:layout_marginTop="80dp"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/location_quiz_question"
@@ -54,8 +53,7 @@
             android:layout_height="wrap_content"
             android:text="Quiz:"
             android:textSize="20dp"
-            android:textAlignment="center"
-            android:layout_marginTop="80dp">
+            android:textAlignment="center">
 
         </TextView>
         <EditText
@@ -75,7 +73,49 @@
             android:backgroundTint="@color/red"
             android:textSize="20dp"
             android:layout_marginTop="40dp"/>
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/hint_1_box"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:contentDescription="Image"
+        android:background="@color/red"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:clickable="true"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:text="Hint1"/>
+
+    <TextView
+        android:id="@+id/hint_2_box"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:contentDescription="Image"
+        android:background="@color/red"
+        android:layout_marginTop="120dp"
+        android:clickable="true"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:text="Hint2"/>
+
+    <TextView
+        android:id="@+id/hint_3_box"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:contentDescription="Image"
+        android:background="@color/red"
+        android:layout_marginTop="230dp"
+        android:clickable="true"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:text="Hint3"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
