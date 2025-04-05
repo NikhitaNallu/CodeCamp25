@@ -41,7 +41,7 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
 
 
         if(getIntent().hasExtra("selected-hunt")){
-            huntID = getIntent().getParcelableExtra("selected-hunt");
+            huntID = getIntent().getStringExtra("selected-hunt");
             fetchLocationsForHunt(huntID);
         }
 

@@ -132,10 +132,12 @@ public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapt
                             String question = locationDoc.getString("quizQuestion");
                             String answer = locationDoc.getString("quizAnswer");
 
+                            String locationId = locationDoc.getId();
+
                             // Make sure that required location fields are not null
                             if (locationName != null) {
                                 // Create and add the LocationObject to the huntLocations list
-                                huntLocations.add(new LocationObject(locationName, locationDescription, hint1, hint2, hint3, latitude, longitude, image, question, answer));
+                                huntLocations.add(new LocationObject(locationId, locationName, locationDescription, hint1, hint2, hint3, latitude, longitude, image, question, answer));
                             } else {
                                 Log.w("Firestore", "Missing required location data for hunt " + huntId);
                             }
