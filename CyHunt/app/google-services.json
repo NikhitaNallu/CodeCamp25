@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "543264775874",
+    "firebase_url": "https://cyhunt-22b00-default-rtdb.firebaseio.com",
+    "project_id": "cyhunt-22b00",
+    "storage_bucket": "cyhunt-22b00.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543264775874:android:7435f1e09039e4d8baa55b",
+        "android_client_info": {
+          "package_name": "com.example.cyhunt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_QfqGiCOltR9sjsj2hVgItkGIDNi8hD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
