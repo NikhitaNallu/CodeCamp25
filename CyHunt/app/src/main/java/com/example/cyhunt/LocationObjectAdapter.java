@@ -59,6 +59,7 @@ public class LocationObjectAdapter extends RecyclerView.Adapter<LocationObjectAd
         public void onClick(View v) {
             onLocationListener.onLocationClick(getAdapterPosition());
         }
+
     }
 
     public interface OnLocationListener{

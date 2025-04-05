@@ -9,6 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +25,7 @@ public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hunts);
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         // Set Pantry selected
@@ -71,9 +73,34 @@ public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapt
                 return false;
             }
         });
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+// Enable the Up button
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+          
+        }
 
     }
-
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        if (item.getItemId() == android.R.id.home) {
+//            // Navigate back when the back arrow is pressed
+//            finish(); // or use NavUtils.navigateUpFromSameTask(this); if you're doing more complex navigation
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+@Override
+public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+        finish(); // or onBackPressed()
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+}
     @Override
     public void onHuntsClick(int position) {
         HuntsObject selectedHunt = huntsArrayList.get(position);
