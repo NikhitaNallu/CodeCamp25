@@ -88,7 +88,7 @@ public class HuntsLocationsActivity extends AppCompatActivity implements Locatio
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setTitle("Your Title"); // Optional: set a custom title
+            //getSupportActionBar().setTitle("Your Title"); // Optional: set a custom title
         }
     }
 

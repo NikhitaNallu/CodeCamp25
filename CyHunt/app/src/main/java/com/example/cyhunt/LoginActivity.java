@@ -2,6 +2,8 @@ package com.example.cyhunt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
@@ -55,7 +57,10 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user != null) {
                             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+                            }, 300); // 300ms delay
                         }
                     } else {
                         Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -83,7 +88,10 @@ public class LoginActivity extends AppCompatActivity {
                             saveUsernameToFirestore(user.getUid(), username);
                             Toast.makeText(LoginActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
                             // Start another activity
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+                            }, 300); // 300ms delay
                         }
                     } else {
                         // Handle sign-up failure
