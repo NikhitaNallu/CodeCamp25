@@ -2,24 +2,54 @@ package com.example.cyhunt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-public class HuntsActivity extends AppCompatActivity {
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class HuntsActivity extends AppCompatActivity implements HuntsObjectAdapter.OnHuntsListener{
+
+    RecyclerView recyclerHome;
+    private ArrayList<HuntsObject> huntsArrayList;
+    public ArrayList<LocationObject> huntLocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hunts);
 
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         // Set Pantry selected
         bottomNavigationView.setSelectedItemId(R.id.hunts_home);
+
+
+        recyclerHome = findViewById(R.id.recycler_home);
+
+        huntLocations = new ArrayList<>();
+        huntLocations.add(new LocationObject("test", "test", "test", "test", "test", 40.748817, -73.985428, "test"));
+        huntLocations.add(new LocationObject("test", "test", "test", "test", "test", 40.748817, -73.985428, "test"));
+        huntLocations.add(new LocationObject("test", "test", "test", "test", "test", 40.748817, -73.985428, "test"));
+
+
+        //Create new array list
+        huntsArrayList = new ArrayList<>();
+        huntsArrayList.add(new HuntsObject("text", "test", 2, "test", huntLocations));
+
+        HuntsObjectAdapter adapter = new HuntsObjectAdapter(huntsArrayList, this, this);
+
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
+
+        recyclerHome.setLayoutManager(layoutManager);
+        recyclerHome.setAdapter(adapter);
+
+
 
         // Perform item selected listener
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
@@ -42,5 +72,18 @@ public class HuntsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onHuntsClick(int position) {
+        HuntsObject selectedHunt = huntsArrayList.get(position);
+        if (selectedHunt == null) {
+            Log.e("PlannerClick", "Selected recipe is null at position: " + position);
+            return;
+        }
+
+        Intent intent = new Intent(this, HuntsLocationsActivity.class);
+        intent.putExtra("selected-hunt", selectedHunt);
+        startActivity(intent);
     }
 }
